@@ -1,0 +1,10 @@
+<div>
+		
+		<div ng-repeat="photo in userUploads" class="col-lg-3 col-sm-4 col-xs-12">
+
+			<a ng-href="#/photo/{{photo._id}}">
+				<img ng-src="{{photo.url}}" class="img-responsive thumbnail" alt="{{photo.originalName}}">
+			</a>
+				
+		</div>
+</div>

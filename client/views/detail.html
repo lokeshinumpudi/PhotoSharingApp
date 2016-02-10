@@ -1,0 +1,73 @@
+<!-- detailed view for auth users -->
+<div ng-if="isAuthToShowDetail" class="container feed-container">
+    <!-- single feed post   -->
+    <div class="panel panel-default">
+        <!-- header -->
+        <div class="panel-heading">
+            <!-- media on panel header -->
+            <div class="media">
+                <!-- media-obj -->
+                <div class="media-left media-middle">
+                    <img class="media-object" ng-src="/#/users/{{photoDetail.postedUser.picture}}" alt="postedUser picture">
+                </div>
+                <!-- media-body -->
+                <div class="media-body">
+                    <div class="media-heading">
+                        <a ng-href="#/users/{{photoDetail.postedUser.userId}}">{{photoDetail.postedUser.username}}</a>
+                    </div>
+                    <small>{{photoDetail.photo.postedByUserAt | date:'medium'}}</small>
+                </div>
+            </div>
+            <!-- media on panel header end -->
+        </div>
+        <!-- panel-header end -->
+        <!-- panel-body -->
+        <div class="panel-body post-body">
+            <div class="post-img">
+                <img class="img-responsive center-block feed-img" ng-src="{{photoDetail.photo.urlMed}}" alt="{{photoDetail.photo.originalPicName}}">
+            </div>
+            <div class="well well-sm">
+                <span class="glyphicon glyphicon-heart animated" ng-class="{red:islikedByUser||islocalLike,pulse:islocalLike}" ng-click="postLike(photoDetail.photo.photoId,islikedByUser)"></span>
+                <strong class="likes-count">{{photoDetail.likes.length || ""}} </strong>
+            </div>
+            <!-- post img end -->
+            <!-- post comment start -->
+            <form class="post-comment" name="postCommentForm" no-validate ng-controller="DetailCtrl">
+                <div class="row">
+                    <div class="col-lg-10 col-lg-offset-1">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">@</span>
+                            <input type="text" name="comment" class="form-control" ng-model="comment" placeholder="comment">
+                            <div class="help-block" ng-messages="postCommentForm.comment.$error">
+                                <div ng-message="commentError">{{enterCommentErrorText}}</div>
+                                <div ng-message="authError">{{authToCommentErrorText}}</div>
+                            </div>
+                            <span class="input-group-btn  post-comment--send-btn">
+                            <button class="btn btn-primary" ng-disabled="!isAuthenticated()" ng-click="postComment(photoDetail.photo._id)" type="button">Send</button>
+                              </span>
+                        </div>
+                    </div>
+                    <!-- column -->
+                </div>
+                <!-- row  -->
+            </form>
+            <!-- post comment end -->
+            <!-- top comments display -->
+            <div class="post-display-comments">
+                <h5 class="text-center">Comments</h5>
+                <hr>
+                <!-- comments as media-list -->
+                <ul class="media-list">
+                    <show-comments commentsForPostId={{photoDetail.photo._id}}></show-comments>
+                </ul>
+                <!-- media-list end -->
+            </div>
+            <!-- top comments display end -->
+        </div>
+        <!-- panel-body -->
+    </div>
+</div>
+<!-- this to show if not authed -->
+<div ng-if="!isAuthToShowDetail" class="jumbotron text-info text-center">
+    <strong>Login to view more</strong>
+</div>

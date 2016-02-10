@@ -1,0 +1,13 @@
+<div>
+    <form action="http://localhost:3000/upload" method="POST" enctype="multipart/form-data">
+        <input type="text" hidden name="user[postedBy]" value="{{userId}}">
+        <input type="text" hidden name="token" value="{{token}}">
+        <!-- <input type="text" hidden name="user[name]" value="{{username}}"> -->
+        <input type="text" name="description">
+        <input type="file" name="photo">
+        <input type="submit" value="post">
+    </form>
+    <div>
+        <li><img class="" ng-src="{{imageSrc}}" alt=""></li>
+    </div>
+</div>

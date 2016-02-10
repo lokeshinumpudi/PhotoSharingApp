@@ -1,0 +1,29 @@
+<div class="row profile-header jumbotron">
+    <div class="col-lg-4  col-xs-4 col-md-4">
+        <img class="center-block img-thumbnail img-responsive" ng-src="{{profile.picture}}" alt="{{profile.photo.username}}.pic">
+        <span class="text-primary center-block text-center">@{{profile.username}}</span>
+    </div>
+
+    <div class="col-lg-8">
+        
+    </div>
+</div>
+<md-content layout-padding class="md-padding">
+    <md-tabs md-dynamic-height md-border-bottom md-center-tabs>
+        <md-tab label="photos">
+            <md-grid-list md-cols-sm="1" md-cols-md="2" md-cols-gt-md="3" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
+                <md-grid-tile ng-repeat="(id,photo) in photos">
+
+                    <a ng-href="/#/photo/{{id}}"><img class="img-responsive" ng-src="{{photo.low_res}}" alt=""></a>
+                </md-grid-tile>
+            </md-grid-list>
+        </md-tab>
+        <!-- photos tab end -->
+        <md-tab label="feed">
+            voila
+        </md-tab>
+        <md-tab label="likes">
+            haha
+        </md-tab>
+    </md-tabs>
+</md-content>

@@ -1,0 +1,120 @@
+<!-- Instagram feed -->
+<!-- <div class="container">
+    <div ng-if="isAuthenticated() && currentUser.username">
+        <div class="row">
+            <div ng-repeat="feed in instagramFeeds" class="col-lg-2 col-sm-3 col-xs-4">
+                <a href="#/photo/{{feed.id}}">
+                    <img ng-src="{{feed.images.standard_resolution.url}}" class="thumbnail img-responsive">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div ng-if="!isAuthenticated()">
+        <div class="jumbotron">
+            <h2><i class="ion-images"></i> Instagram</h2>
+            <p>This is a basic Instagram clone powered by <strong>Satellizer</strong>. To continue, please log in with your Instagram account or create a new email account.</p>
+            <p>
+                <a class="btn btn-lg btn-success" href="#/login"><i class="ion-log-in"></i> Log in</a>
+                <a class="btn btn-lg btn-primary" href="#/signup"><i class="ion-person-add"></i> Create account</a>
+            </p>
+        </div>
+    </div>
+    <div ng-if="isAuthenticated() && !currentUser.instagramId" class="center-form panel">
+        <div class="panel-body">
+            <h5 class="text-center"><i class="ion-link"></i> Link Account</h5>
+            <p>To complete the registration process you must link your Instagram account.</p>
+            <button class="btn btn-block btn-instagram" ng-click="linkInstagram()">
+                <i class="ion-social-instagram"></i> Sign in with Instagram
+            </button>
+        </div>
+    </div>
+</div>
+ -->
+<div class="container feed-container">
+    <div ng-if="!homeFeedAvailable">
+        <!-- show no feed  -->
+        <div class="jumbotron center-block text-center"><strong class="text-info">No Feed to load...</strong></div>
+    </div>
+    <!-- single feed post   -->
+    <div ng-if="homeFeedAvailable" ng-repeat="feed in homeFeeds" class="panel panel-default">
+        <!-- header -->
+        <div class="panel-heading">
+            <!-- media on panel header -->
+            <div class="media">
+                <!-- media-obj -->
+                <div class="media-left media-middle">
+                    <a ng-href="/#/users/{{feed.postedBy.username}}">
+                        <img class="media-object" ng-src="{{feed.postedBy.picture}}" alt="author Image">
+                    </a>
+                </div>
+                <!-- media-body -->
+                <div class="media-body">
+                    <a ng-href="/#/user/@{{feed.postedBy.username}}">
+                        <div class="media-heading">
+                            {{feed.postedBy.username}}
+                        </div>
+                    </a>
+                    <small>{{feed.createdAt | date: 'medium'}}</small>
+                </div>
+            </div>
+            <!-- media on panel header end -->
+        </div>
+        <!-- panel-header end -->
+        <!-- panel-body -->
+        <div class="panel-body post-body">
+            <div class="post-img" ng-click="openPostDetail(id)">
+                <img class="img-responsive center-block feed-img" ng-src="{{feed.images.med_res}}" alt="{{feed.originalname}}">
+            </div>
+            <div class="well well-sm" like-handle>
+                <span class="glyphicon glyphicon-heart" ng-class="{red:feed.islikedByUser}" center-block></span>
+                <strong class="likes-count">{{feed.likes.length || ""}}</strong class="likes-count">
+            </div>
+            <!-- post img end -->
+            <div class="post-comment">
+                <div class="row">
+                    <div class="col-lg-10 col-lg-offset-1">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">@</span>
+                            <input type="text" class="form-control" ng-model="comments[id]" required placeholder="Comment" ng-disabled="!isAuthenticated()">
+                            <span class="input-group-btn  post-comment--send-btn">
+                            <button class="btn btn-primary" ng-disabled="!isAuthenticated()" ng-click="postComment(feed._id)" type="button">Send</button>
+                              </span>
+                        </div>
+                    </div>
+                    <!-- column -->
+                </div>
+                <!-- row  -->
+            </div>
+            <!-- post comment end -->
+            <!-- top comments display -->
+            <div class="post-display-comments">
+                <h5 class="text-center">Top Comments</h5>
+                <hr>
+                <!-- comments as media-list -->
+                <ul class="media-list">
+                    <li class="media" ng-repeat="comment in feed.comments | limitTo:3">
+                        <div class="media-left media-middle">
+                            <a href=""><img ng-src="{{comment.commentByUserPicture}}" alt="" class="media-object img-circle"></a>
+                        </div>
+                        <div class="media-body">
+                            <div class="media-heading">
+                                {{comment.commentByUserName}}
+                                <small class="comment-time">-{{comment.commentByUserAt|date:'shortTime'}}</small>
+                            </div>
+                            {{comment.comment}}
+                        </div>
+                    </li>
+                    <hr>
+                </ul>
+                <!-- media-list end -->
+            </div>
+            <!-- top comments display end -->
+            <a href="#/photo/{{feed._id}}" class="text-center pull-center">Show all comments</a>
+        </div>
+        <!-- panel-body -->
+    </div>
+
+
+
+
+</div>

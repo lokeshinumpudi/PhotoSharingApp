@@ -1,0 +1,17 @@
+{
+  "name": "gulp-learn",
+  "version": "1.0.0",
+  "description": "gulp test ",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^3.8.11"
+  },
+  "devDependencies": {
+    
+    },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

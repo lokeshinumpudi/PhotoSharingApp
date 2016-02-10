@@ -1,0 +1,18 @@
+<div>
+    <section class="comments-section">
+        <li class="media" ng-repeat="comment in comments track by comment._id">
+            <div class="media-left media-middle">
+                <a href=""><img ng-src="{{comment.commentByUserPicture}}" alt="" class="media-object img-circle"></a>
+            </div>
+            <div class="media-body">
+                <div class="media-heading">
+                    {{comment.commentByUserName}}
+                    <small class="comment-time">-{{comment.commentByUserAt|date:'shortTime'}}</small>
+                </div>
+                {{comment.comment}}
+            </div>
+        </li>
+    </section>
+    <hr>
+    <button id="loadMoreComments"  class="btn btn-primary btn-sm btn-block" ng-click="loadMore()">Load more</button>
+</div>
